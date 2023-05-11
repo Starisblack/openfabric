@@ -1,0 +1,25 @@
+.navBar {
+    min-height: 45px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3% 10%;
+    box-sizing: border-box;
+    z-index: 90;
+}
+
+.navBar nav {
+    height: 100%;
+}
+
+
+
+@media (max-width: 499px) {
+    .DesktopOnly {
+        display: none;
+    }
+}

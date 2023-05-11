@@ -2,8 +2,10 @@ require("dotenv").config({ path: "./config.env" });
 const express = require("express");
 const connectDB = require("./config/db");
 const errorHandler = require("./middleware/error");
-// const session = require('express-session');
 const cors = require("cors");
+const authRoute = require("./routes/auth")
+const privateRoute = require("./routes/private")
+const productRoute = require("./routes/product")
 // connect DB
 connectDB();
 
@@ -19,8 +21,9 @@ app.use(
   })
 );
 
-app.use("/openfrabic/auth", require("./routes/auth"));
-app.use("/openfrabic/private", require("./routes/private"));
+app.use("/openfrabic/auth", authRoute);
+app.use("/openfrabic/private", privateRoute);
+app.use("/openfrabic/product", productRoute)
 
 app.use(errorHandler);
 

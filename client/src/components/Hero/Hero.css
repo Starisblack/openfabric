@@ -1,0 +1,21 @@
+.hero-container{
+    height: 100vh;
+    position: relative;
+    background-image: url("../../assets/home.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+.hero-intro{
+    text-align: center;
+}
+
+.hero-intro h4{
+    color: white;
+}
