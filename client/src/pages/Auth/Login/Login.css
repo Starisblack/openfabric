@@ -6,13 +6,13 @@
 
 .login-page a{
     text-decoration: none;
-    color: rgba(46, 125, 50, 0.5);
+    color: black;
     font-weight: 700;
     line-height: 32px;
 }
 
 .login-page a:hover{
-    color: black;
+    opacity: .8;
 }
 
 .login-page .MuiContainer-root{

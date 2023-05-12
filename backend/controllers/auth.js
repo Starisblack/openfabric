@@ -9,7 +9,7 @@ const jwt = require("jsonwebtoken");
 
 exports.logout = (req, res) => {
   req.logout();
-  res.redirect("http://localhost:3000");
+  res.redirect("http://127.0.0.1:5173");
 };
 
 

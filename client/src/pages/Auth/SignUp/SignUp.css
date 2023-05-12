@@ -4,15 +4,19 @@
     margin-top: 1rem;
 }
 
+.signUp-page p{
+    color: black;
+}
+
 .signUp-page a{
     text-decoration: none;
-    color: rgba(46, 125, 50, 0.5);
+    color: black;
     font-weight: 700;
     line-height: 32px;
 }
 
 .signUp-page a:hover{
-    color: black;
+    color: .8;
 }
 
 .signUp-page .MuiContainer-root{

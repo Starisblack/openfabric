@@ -1,0 +1,11 @@
+.add-product-container{
+    text-align: center;
+    width: 444px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.add-product-container .btn{
+    width: 100%;
+}
+

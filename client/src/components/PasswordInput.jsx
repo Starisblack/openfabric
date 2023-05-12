@@ -7,7 +7,7 @@ import {
   IconButton,
 } from "@mui/material";
 import { useState } from "react";
-import PropTypes from 'prop-types';
+import PropTypes, { string } from 'prop-types';
 
 const PasswordInput = (props) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -22,9 +22,8 @@ const PasswordInput = (props) => {
     <div>
       <FormControl margin="normal" fullWidth variant="outlined">
       
-        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+        <InputLabel htmlFor="outlined-adornment-password">{props.label}</InputLabel>
         <OutlinedInput
-          id="outlined-adornment-password"
           {...props.register}
           type={showPassword ? "text" : "password"}
           endAdornment={
@@ -39,7 +38,7 @@ const PasswordInput = (props) => {
               </IconButton>
             </InputAdornment>
           }
-          label="Password"
+          label={props.label}
         />
       </FormControl>
     </div>
@@ -49,5 +48,6 @@ const PasswordInput = (props) => {
 export default PasswordInput;
 
 PasswordInput.propTypes ={
-  register: PropTypes.node
+  register: PropTypes.object,
+  label: string
 }

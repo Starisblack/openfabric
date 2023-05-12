@@ -1,13 +1,13 @@
 .navBar {
     min-height: 45px;
     width: 100%;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 3% 10%;
+    padding: 1% 10%;
     box-sizing: border-box;
     z-index: 90;
 }
@@ -17,9 +17,17 @@
 }
 
 
-
-@media (max-width: 499px) {
-    .DesktopOnly {
-        display: none;
-    }
+.left-nav-container, .mobile-toggle-container{
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
+
+@media (max-width: 631px) {
+     .navBar{
+        padding: 3% 5%;
+     }
+}
+
+
+

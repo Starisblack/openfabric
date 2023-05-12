@@ -16,6 +16,7 @@
     text-align: center;
 }
 
-.hero-intro h4{
+
+.hero-intro h4, .hero-intro h1{
     color: white;
 }

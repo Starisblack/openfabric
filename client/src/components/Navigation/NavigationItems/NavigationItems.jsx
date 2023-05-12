@@ -1,13 +1,18 @@
 import './NavigationItems.css';
 import NavigationItem from './NavigationItem/NavigationItem';
+import { useSelector } from 'react-redux';
+import { authToken } from '../../../reducers/authReducers';
 
-const navigationItems = (props) => (
-    <ul className="NavigationItems">
+const NavigationItems = () => {
+   const token = useSelector(authToken)
+
+   return <ul className="NavigationItems">
         <NavigationItem link="/">Home</NavigationItem>
-       { props.isAuth && <NavigationItem link="/shop">Shop</NavigationItem>}
-       { props.isAuth ? <NavigationItem>Logout</NavigationItem>
+        <NavigationItem link="/shop">Shop</NavigationItem>
+        { token ? <NavigationItem>Logout</NavigationItem>
          : <NavigationItem link="/auth/login">Login</NavigationItem>}
+         <NavigationItem link="/product/add">Add Product</NavigationItem>
     </ul>
-);
+};
 
-export default navigationItems;
+export default NavigationItems;
