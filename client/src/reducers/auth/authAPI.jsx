@@ -1,4 +1,4 @@
-import Axios from "../axiosBaseUrl"
+import Axios from "../../axiosBaseUrl"
 
 const config = {
   header: {
@@ -16,20 +16,15 @@ export const userLogin = (userInput) => {
 
 export const signUpUser = (userInput) => {
    
-  const { username, email, password } = userInput;
+  const { email, password } = userInput;
 
   return Axios.post("/auth/register",
-    { username, email, password },
+    {email, password },
     config
   );
 };
 
 
-
-
-export const logOut = () => {
-  return Axios.get("/auth/logout");
-};
 
 
 

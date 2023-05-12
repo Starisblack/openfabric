@@ -1,11 +1,25 @@
 const Product = require("../models/Product");
 
+exports.getUserProducts = async (req, res, next) => {
+  const { userId } = req.body;
+  console.log(userId)
+  try {
+    await Product.$where(createdBy === userId);
+    res.status(201).json({
+      success: true,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 exports.addProduct = async (req, res, next) => {
-  const { name, description, price } = req.body;
+  const { title, createdBy, description, price } = req.body;
 
   try {
     const product = await Product.create({
-      name,
+      title,
+      createdBy,
       description,
       price,
     });

@@ -99,6 +99,36 @@ exports.forgotpassword = async (req, res, next) => {
   }
 };
 
+exports.updateAccount = async (req, res, next) => {
+  const { id, fullName, phone, address } = req.body; 
+
+  try {
+    await User.findByIdAndUpdate(id, { fullName, phone, address });
+    res.status(201).json({
+      success: true,
+      message: "Account Details Updated",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.deleteAccount = async (req, res, next) => {
+  const { id } = req.body;
+
+  try {
+    await User.findByIdAndRemove(id);
+    res.status(201).json({
+      success: true,
+      message: "Account deleted",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+
 exports.resetpassword = async (req, res, next) => {
   const resetToken = crypto
     .createHash("sha256")

@@ -12,7 +12,7 @@ import "./SignUp.css";
 import PasswordInput from "../../../components/PasswordInput";
 import { useEffect} from "react";
 import BeatLoader from "react-spinners/BeatLoader";
-import { authToken, clearError, error, loading, setError, signUpAsync } from "../../../reducers/authReducers";
+import { authToken, clearError, error, loading, setError, signUpAsync } from "../../../reducers/auth/authReducers";
 import { useDispatch, useSelector } from "react-redux";
 
 const SignUp = () => {
@@ -39,7 +39,7 @@ const SignUp = () => {
       return dispatch(setError("Password do not match"))
     }
 
-      dispatch(signUpAsync())
+      dispatch(signUpAsync(userInput))
       reset();
   };
 

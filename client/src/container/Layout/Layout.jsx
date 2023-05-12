@@ -4,14 +4,31 @@ import { useLocation } from "react-router-dom";
 import NavBar from "../../components/Navigation/NavBar/NavBar";
 import "./Layout.css";
 import PropTypes from "prop-types";
+import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
+import { useState } from "react";
 
 const Layout = ({ children }) => {
- const location = useLocation()
+  const location = useLocation();
+
+  const [showSideDrawer, setShowSideDrawer] = useState(false);
+
+  const sideDrawerClosedHandler = () => {
+    setShowSideDrawer(false);
+  };
+
+  const sideDrawerToggleHandler = () => {
+    setShowSideDrawer((prevValue) => !prevValue);
+  };
   return (
     <>
-      <NavBar />
-
-      <main style={{paddingTop: location.pathname === "/" ? null : "7%"}} className="Content">{children}</main>
+      <NavBar  drawerToggleClicked={sideDrawerToggleHandler}  />
+      <SideDrawer  open={showSideDrawer} closed={sideDrawerClosedHandler} />
+      <main
+        style={{ paddingTop: location.pathname === "/" ? null : "7%" }}
+        className="Content"
+      >
+        {children}
+      </main>
       {/* <Footer /> */}
     </>
   );

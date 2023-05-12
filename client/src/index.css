@@ -72,3 +72,9 @@ button:focus-visible {
     display: none;
   }
 }
+
+@media (max-width: 769px) {
+    .page{
+      padding-top: 25%;
+    }
+}

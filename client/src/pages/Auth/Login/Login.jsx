@@ -18,7 +18,7 @@ import {
   error,
   loading,
   loginAsync,
-} from "../../../reducers/authReducers";
+} from "../../../reducers/auth/authReducers";
 import { useEffect } from "react";
 
 
@@ -79,7 +79,7 @@ const Login = () => {
               autoComplete="email"
               autoFocus
             />
-            <PasswordInput register={{ ...register("password") }} />
+            <PasswordInput label="Password" register={{ ...register("password") }} />
             <Grid item xs={12} md={12}>
               <Link to="/forgotpassword" className="text-start">
                 Forgot password?

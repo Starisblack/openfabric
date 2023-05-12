@@ -9,12 +9,15 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import ListIcon from '@mui/icons-material/List';
 import Logout from "@mui/icons-material/Logout";
-import { logOut } from "../../reducers/authApi";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { authToken, logout } from "../../reducers/auth/authReducers";
 
 export default function AccountMenu() {
+
+ const navigate = useNavigate()
   const dispatch = useDispatch();
+  const token = useSelector(authToken)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -24,12 +27,13 @@ export default function AccountMenu() {
     setAnchorEl(null);
   };
 
-  const handleLogout = () => {
-     dispatch(logOut());
+  const handleLogout =  async () => {
+     await dispatch(logout());
+     navigate("/auth/login")
   };
 
-  return (
-    <React.Fragment>
+  return (<>
+   { token && <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
         <Tooltip title="Account settings">
           <IconButton
@@ -85,12 +89,15 @@ export default function AccountMenu() {
         </MenuItem>
         </Link>
         <Divider />
+
+        <Link to="/product/manage">
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <ListIcon fontSize="small" />
           </ListItemIcon>
           Your Products
         </MenuItem>
+        </Link>
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
@@ -98,6 +105,6 @@ export default function AccountMenu() {
           Logout
         </MenuItem>
       </Menu>
-    </React.Fragment>
+    </React.Fragment>}</>
   );
 }

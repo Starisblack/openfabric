@@ -8,8 +8,11 @@ import { useLocation } from "react-router-dom";
 import AccountMenu from "../../Menu/Menu";
 
 
+
 const NavBar = (props) => {
   const location = useLocation();
+
+
 
   return (
     <>
@@ -31,9 +34,9 @@ const NavBar = (props) => {
 
         <div className="left-nav-container desktopOnly">
           <nav>
-            <NavigationItems clicked={props.clicked} isAuth={props.isAuth} />
+            <NavigationItems clicked={props.clicked} />
           </nav>
-          <ShoppingBagOutlinedIcon sx={{ color: "white" }} />
+           <ShoppingBagOutlinedIcon sx={{ color: "white" }} />
 
           <AccountMenu />
         </div>
@@ -46,6 +49,5 @@ export default NavBar;
 
 NavBar.propTypes = {
   drawerToggleClicked: PropTypes.func,
-  clicked: PropTypes.func,
-  isAuth: PropTypes.bool,
+  clicked: PropTypes.func
 };

@@ -2,10 +2,43 @@ import "./SingleProduct.css";
 import chair from "../../../assets/chair.jpg";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {useNavigate, useParams } from "react-router-dom";
+import Axios from "../../../axiosBaseUrl"
+import { useDispatch, useSelector } from "react-redux";
+import { addQuantity, quantity, removeQuantity } from "../../../reducers/product/product";
 
 const SingleProduct = () => {
-  const [quantity, setQuantity] = useState(0);
+
+  const {id} = useParams()
+
+ const value = useSelector(quantity)
+
+ const dispatch = useDispatch()
+  // const [quantity, setQuantity] = useState(0);
+  const [product, setProduct] = useState({})
+  const navigate = useNavigate()
+
+
+  useEffect(()=>{
+    const getProduct =async () => {
+
+      try {
+       const {data} = await Axios.get("/product/" + id)
+
+        setProduct(data.product)
+      } catch (error) {
+         alert(error)
+         navigate("/")
+      }
+    }
+
+    getProduct()
+
+       
+  }, [id, navigate])
+
+ if(!product) return <h1>Loading</h1>
 
   return (
     <div className="single-product-container">
@@ -14,26 +47,23 @@ const SingleProduct = () => {
           <img src={chair} />
         </div>
         <div className="col-12 col-lg-6">
-          <h3 className="single-product-title">White Wall Clock</h3>
-          <p className="price">$250</p>
+          <h3 className="single-product-title">{product?.title}</h3>
+          <p className="price">${product.price?.toLocaleString()}</p>
           <p className="description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut
-            ullamcorper leo, eget euismod orci. Cum sociis natoque penatibus et
-            magnis dis parturient montes nascetur ridiculus mus. Vestibulum
-            ultricies aliquam convallis.
+            {product.description}
           </p>
           <div style={{ display: "flex", flexWrap: "wrap" }}>
             <div className="quantity quantity-buttons">
               <p>Quantity</p>
               <div className="quantity-btn">
-                <div  onClick={() => setQuantity(quantity - 1)}>
+                <button disabled={value === 0}  onClick={() => dispatch(removeQuantity())}>
                   <RemoveIcon />
-                </div>
-                <input type="number" value={quantity} />
+                </button>
+                <input type="number" value={value || 0} />
 
-                <div onClick={() => setQuantity(quantity + 1)}>
+                <button onClick={() => dispatch(addQuantity())}>
                   <AddIcon />
-                </div>
+                </button>
               </div>
             </div>
 
