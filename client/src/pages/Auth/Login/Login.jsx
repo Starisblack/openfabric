@@ -2,7 +2,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -51,15 +50,11 @@ const Login = () => {
   };
 
   return (
-    <div className="login-page">
+    <div className="page login-page">
       <Container component="main" maxWidth="xs">
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
+        <div style={{arginTop: 8,
+            display: "flex",  flexDirection: "column",
+            alignItems: "center", }}
         >
           <Avatar sx={{ m: 1, bgcolor: "black" }}>
             <LockOutlinedIcon />
@@ -105,7 +100,7 @@ const Login = () => {
               </Grid>
             </Grid>
           </form>
-        </Box>
+        </div>
       </Container>
     </div>
   );

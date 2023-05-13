@@ -5,7 +5,12 @@ import Spinner from "../../components/Spinner";
 import FormDialog from "../../components/popUpForm";
 import EditProfile from "./EditProfile/EditProfile";
 import { useDispatch, useSelector } from "react-redux";
-import { authToken, logout, setUser, user } from "../../reducers/auth/authReducers";
+import {
+  authToken,
+  logout,
+  setUser,
+  user,
+} from "../../reducers/auth/authReducers";
 import { useNavigate } from "react-router-dom";
 import Axios from "../../axiosBaseUrl";
 import ConfirmationDialog from "../../components/ConfirmationDialog/ConfirmationDialog";
@@ -81,17 +86,18 @@ const UserProfile = () => {
   };
 
   const yesHandler = async () => {
-     setLoading(true)
+    setLoading(true);
     const config = {
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     };
 
     try {
       await Axios.post("/auth/delete", { id: userData._id }, config);
-      dispatch(logout())
-      setLoading(false)
+      dispatch(logout());
+      setLoading(false);
       navigate("/auth/login");
     } catch (error) {
       console.log(error);
@@ -114,7 +120,7 @@ const UserProfile = () => {
       <section className="h-100 gradient-custom-2">
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
-            <div className="col col-lg-3  col-xl-5">
+            <div className="col col-lg-6  col-xl-5">
               <div
                 className="rounded-top text-white d-flex flex-row"
                 style={{ backgroundColor: "#000", height: "200px" }}

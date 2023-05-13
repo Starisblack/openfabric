@@ -5,8 +5,7 @@
 
   color-scheme: light dark;
   color: black;
-  background-color: white;
-
+  background-color: rgb(250, 250, 250);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -23,6 +22,7 @@ a {
 body {
   margin: 0;
   min-width: 320px;
+  background-color: transparent;
 }
 
 h1 {
@@ -77,4 +77,12 @@ button:focus-visible {
     .page{
       padding-top: 25%;
     }
+
+}
+
+@media (max-width: 550px) {
+  h1{
+    font-size: 30px;
+  }
+
 }

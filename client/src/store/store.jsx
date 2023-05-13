@@ -10,9 +10,22 @@ const persistConfig = {
   storage,
 }
 
+const authPersistConfig = {
+  key: 'user',
+  storage,
+  blacklist: ["loading", "status", "error"]
+}
+
+const productPersistConfig = {
+  key: 'product',
+  storage,
+  blacklist: ["products", "quantity"]
+}
+
+
 const rootReducer = combineReducers({ 
-  auth: authReducers,
-  product: productReducers
+  auth: persistReducer(authPersistConfig, authReducers),
+  product: persistReducer(productPersistConfig, productReducers)
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

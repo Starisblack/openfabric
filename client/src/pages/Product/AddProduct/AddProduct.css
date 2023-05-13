@@ -9,3 +9,9 @@
     width: 100%;
 }
 
+@media (max-width: 769px) {
+    .add-product-container{
+        padding: 0 5%;
+    }
+}
+

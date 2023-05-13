@@ -1,0 +1,14 @@
+.del-icon{
+    cursor: pointer;
+}
+
+.del-icon:hover{
+    opacity: .8;
+}
+
+.go-shopping-btn{
+    color: black; 
+    border-color: black; 
+    width: 20%; 
+    margin: 0 auto;
+}

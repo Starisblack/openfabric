@@ -16,6 +16,10 @@
     height: 100%;
 }
 
+.scroll .navBar{
+    background-color: black;
+}
+
 
 .left-nav-container, .mobile-toggle-container{
     display: flex;

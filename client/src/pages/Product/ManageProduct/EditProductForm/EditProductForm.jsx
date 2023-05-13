@@ -4,19 +4,19 @@ import { TextField, Button } from "@mui/material";
 import PropTypes from "prop-types";
 import BeatLoader from "react-spinners/BeatLoader";
 import { useState } from "react";
-import Axios from "../../../axiosBaseUrl";
+import Axios from "../../../../axiosBaseUrl";
 import { useSelector } from "react-redux";
-import { authToken } from "../../../reducers/auth/authReducers";
+import { authToken } from "../../../../reducers/auth/authReducers";
 
-const EditProfile = ({ handleClose, data }) => {
+const EditProductForm = ({ handleClose, data }) => {
   const { handleSubmit, register } = useForm();
-  const token = useSelector(authToken)
   const [loading, setLoading] = useState(false);
+  const token = useSelector(authToken)
 
   const handleForm = async (userInput) => {
     setLoading(true);
 
-    const { fullName, phone, address } = userInput;
+    const { title, description, price } = userInput;
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -24,10 +24,10 @@ const EditProfile = ({ handleClose, data }) => {
       },
     };
 
-    try {
-      await Axios.post(
-        "/auth/update",
-        { id: data._id, fullName, phone, address },
+    try { 
+      await Axios.put(
+        "/product/update",
+        { id: data._id, title, description, price },
         config
       );
       setLoading(false);
@@ -40,32 +40,33 @@ const EditProfile = ({ handleClose, data }) => {
   };
   return (
     <>
-      <h2 className="edit-profile-container">Edit Your Profile</h2>
+      <h2 className="edit-product-container">Edit Your Product Details</h2>
       <form onSubmit={handleSubmit(handleForm)}>
         <TextField
-          {...register("fullName")}
+          {...register("title")}
           fullWidth
           margin="normal"
-          id="outlined-required"
-          label="Full Name"
-          defaultValue={data?.fullName}
+          label="title"
+          defaultValue={data?.title}
+        />
+
+        <TextField
+          type="number"
+          {...register("price")}
+          margin="normal"
+          fullWidth
+          label="Price"
+          defaultValue={data?.price}
         />
 
         <TextField
           margin="normal"
           fullWidth
-          id="outlined-required"
-          label="Phone"
-          {...register("phone")}
-          defaultValue={data?.phone}
-        />
-        <TextField
-          {...register("address")}
-          margin="normal"
-          fullWidth
-          id="outlined-multiline-static"
-          label="Your Address"
-          defaultValue={data?.address}
+          multiline
+          rows={4}
+          label="Description"
+          {...register("description")}
+          defaultValue={data?.description}
         />
 
         <div
@@ -81,9 +82,9 @@ const EditProfile = ({ handleClose, data }) => {
     </>
   );
 };
-export default EditProfile;
+export default EditProductForm;
 
-EditProfile.propTypes = {
+EditProductForm.propTypes = {
   handleClose: PropTypes.func,
   data: PropTypes.object,
 };

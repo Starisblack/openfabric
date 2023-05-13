@@ -12,6 +12,7 @@ const Shop = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const getAllProduct = async () => {
       try {
         const { data } = await Axios.get("/product/all");

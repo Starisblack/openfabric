@@ -3,16 +3,27 @@ import Logo from "../../Logo/Logo";
 import NavigationItems from "../NavigationItems/NavigationItems";
 import DrawerToggle from "../SideDrawer/DrawerToggle/DrawerToggle";
 import PropTypes from "prop-types";
-import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import { useLocation } from "react-router-dom";
 import AccountMenu from "../../Menu/Menu";
-
+import { useEffect } from "react";
+import CartIcon from "../../CartIcon";
 
 
 const NavBar = (props) => {
   const location = useLocation();
 
+  const changeBackground = () => {
+    if (window.scrollY >= 66) {
+      document.body.classList.add("scroll");
+    } else {
+      document.body.classList.remove("scroll");
+    }
+  };
 
+  useEffect(() => {
+    changeBackground();
+    window.addEventListener("scroll", changeBackground);
+  });
 
   return (
     <>
@@ -25,8 +36,9 @@ const NavBar = (props) => {
       >
         <Logo />
 
+
         <div className="mobile-toggle-container mobileOnly">
-          <ShoppingBagOutlinedIcon sx={{ color: "white" }} />
+         <CartIcon />
           <AccountMenu />
 
           <DrawerToggle clicked={props.drawerToggleClicked} />
@@ -36,7 +48,7 @@ const NavBar = (props) => {
           <nav>
             <NavigationItems clicked={props.clicked} />
           </nav>
-           <ShoppingBagOutlinedIcon sx={{ color: "white" }} />
+          <CartIcon />
 
           <AccountMenu />
         </div>
@@ -49,5 +61,5 @@ export default NavBar;
 
 NavBar.propTypes = {
   drawerToggleClicked: PropTypes.func,
-  clicked: PropTypes.func
+  clicked: PropTypes.func,
 };

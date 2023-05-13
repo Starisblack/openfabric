@@ -6,11 +6,11 @@ import { useEffect, useState } from "react";
 import {useNavigate, useParams } from "react-router-dom";
 import Axios from "../../../axiosBaseUrl"
 import { useDispatch, useSelector } from "react-redux";
-import { addQuantity, quantity, removeQuantity } from "../../../reducers/product/product";
+import { addQuantity, addToCart, quantity, removeQuantity } from "../../../reducers/product/product";
 
 const SingleProduct = () => {
 
-  const {id} = useParams()
+  const {id} = useParams() 
 
  const value = useSelector(quantity)
 
@@ -21,6 +21,7 @@ const SingleProduct = () => {
 
 
   useEffect(()=>{
+    window.scrollTo(0, 0);
     const getProduct =async () => {
 
       try {
@@ -67,7 +68,7 @@ const SingleProduct = () => {
               </div>
             </div>
 
-            <button type="submit" className="add-to-cart-btn">
+            <button onClick={()=> dispatch(addToCart({...product, quantity: value}))} type="submit" className="add-to-cart-btn">
               Add to cart
             </button>
           </div>

@@ -1,17 +1,6 @@
 const Product = require("../models/Product");
 
-exports.getUserProducts = async (req, res, next) => {
-  const { userId } = req.body;
-  console.log(userId)
-  try {
-    await Product.$where(createdBy === userId);
-    res.status(201).json({
-      success: true,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
+
 
 exports.addProduct = async (req, res, next) => {
   const { title, createdBy, description, price } = req.body;
@@ -44,10 +33,9 @@ exports.getAllProducts = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-
-  // .then((item) => res.json(item))
-  // .catch((err) => res.status(400).json("Error: " + err));
 };
+
+
 
 exports.getProduct = async (req, res, next) => {
   try {
@@ -63,10 +51,10 @@ exports.getProduct = async (req, res, next) => {
 };
 
 exports.updateProduct = async (req, res, next) => {
-  const { id, name, description, price } = req.body;
+  const { id, title, description, price } = req.body;
 
   try {
-    await Product.findByIdAndUpdate(id, { name, description, price });
+    await Product.findByIdAndUpdate(id, { title, description, price });
     res.status(201).json({
       success: true,
       message: "Products Details Updated",
@@ -79,6 +67,7 @@ exports.updateProduct = async (req, res, next) => {
 exports.deleteProduct = async (req, res, next) => {
   const { id } = req.body;
 
+  console.log(id)
   try {
     await Product.findByIdAndRemove(id);
     res.status(201).json({

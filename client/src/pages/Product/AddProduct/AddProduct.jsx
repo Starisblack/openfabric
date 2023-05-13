@@ -55,7 +55,7 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="add-product-container">
+    <div className="page add-product-container">
       <h1>Add Your Product</h1>
       <form onSubmit={handleSubmit(sumbitHandler)}>
         <TextField

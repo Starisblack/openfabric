@@ -2,7 +2,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -10,9 +9,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./SignUp.css";
 import PasswordInput from "../../../components/PasswordInput";
-import { useEffect} from "react";
+import { useEffect } from "react";
 import BeatLoader from "react-spinners/BeatLoader";
-import { authToken, clearError, error, loading, setError, signUpAsync } from "../../../reducers/auth/authReducers";
+import {
+  authToken,
+  clearError,
+  error,
+  loading,
+  setError,
+  signUpAsync,
+} from "../../../reducers/auth/authReducers";
 import { useDispatch, useSelector } from "react-redux";
 
 const SignUp = () => {
@@ -34,21 +40,21 @@ const SignUp = () => {
   const onSubmitHandler = async (userInput) => {
     if (userInput.password !== userInput.confirmPassword) {
       setTimeout(() => {
-       dispatch(clearError())
+        dispatch(clearError());
       }, 3000);
-      return dispatch(setError("Password do not match"))
+      return dispatch(setError("Password do not match"));
     }
 
-      dispatch(signUpAsync(userInput))
-      reset();
+    dispatch(signUpAsync(userInput));
+    reset();
   };
 
   return (
     <div className="signUp-page">
       <Container component="main" maxWidth="xs">
-        <Box
-          sx={{
-            marginTop: 8,
+        <div
+          style={{
+            arginTop: 8,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -100,7 +106,7 @@ const SignUp = () => {
               </Grid>
             </Grid>
           </form>
-        </Box>
+        </div>
       </Container>
     </div>
   );

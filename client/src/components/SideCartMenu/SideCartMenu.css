@@ -1,0 +1,205 @@
+.mobile-slider{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    z-index: 99999;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 450px;
+    max-width: 100%;
+    height: 100%;
+    background-color: #fff;
+    transition: width 1s ease-in;
+}
+
+
+.mobile-slider-top {
+    text-align: left;
+    /* flex-direction: row;
+    justify-content: space-between;
+    align-items: center; */
+    padding: 23px 30px 23px 35px;
+    margin: 0;
+    background-color: #dcdcdc;
+    -webkit-transition: left 1s,opacity 1s;
+    transition: left 1s,opacity 1s;
+    color: #000a12;
+    font-size: 16px;
+}
+
+.close-menu{
+    cursor: pointer;
+}
+
+.close-menu:hover{
+    background-color: rgba(255, 255, 255, 0.644);
+    border-radius: 100%;
+}
+
+.mobile-slider-top .close-menu {
+    color: #000;
+    font-size: 1.3em;
+    position: relative;
+    float: right;
+}
+
+.cart-block {
+    position: relative;
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 35px 35px 59px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.cart-block .cart-total {
+    font-size: 15px;
+    margin: 0;
+    color: #000a12;
+    text-align: left;
+}
+
+.progress-area {
+    width: 100%;
+    background-color: #f1f1f1;
+    transition: background-color .25s ease;
+    height: 7px;
+    border-radius: 0;
+    margin-top: 10px;
+    position: relative;
+}
+
+.cart-block .progress-area .cart-shipping{
+    background: #df4141;
+    background-image: linear-gradient(135deg,rgba(255,255,255,.2) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.2) 50%,rgba(255,255,255,.2) 75%,transparent 75%,transparent);
+    background-size: 15px 15px;
+    position: absolute;
+    height: 6px;
+    left: 0;
+}
+
+.cart-block .emptycart {
+    margin: 0;
+    z-index: 99;
+    text-align: center;
+}
+
+.cart-block .emptycart svg {
+    margin-bottom: 40px;
+    width: 100%;
+    background: #fff;
+    margin-top: -15px;
+}
+
+.emptycart .btn {
+    font-weight: 400;
+    text-transform: capitalize;
+    font-size: 16px;
+    line-height: 28px;
+    background-color: #000a12;
+    color: #fff;
+    padding: 11px 33px;
+    border: none;
+    border-radius: 0;
+    transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+    text-align: center;
+}
+
+.cart-block .hamburger-group {
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.cart-block .hamburger-minicart {
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.cart-block .hamburger-minicart .minicart {
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.cart-block .hamburger-minicart .widget_shopping_cart_content {
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 20px 0;
+}
+
+
+/* testing */
+
+.rt-cart-box .shopping-cart-content .no-product-text {
+    text-align: center;
+    color: #676666;
+    padding: 0;
+    margin: 0;
+    padding-top: 15px;
+    text-transform: capitalize;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.Price-amount {
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    color: #000a12;
+    font-size: 16px;
+}
+
+.product-total {
+    width: 100%;
+    text-align: right;
+    padding-bottom: 10px;
+    margin: 0;
+    overflow: hidden;
+    margin-top: 8px;
+    font-size: 16px;
+    line-height: 26px;
+    color: #000a12;
+    border-top: 1px solid #d3d3d3;
+    padding-top: 10px;
+}
+
+.mini-cart-buttons a {
+    text-align: center;
+    display: block;
+    width: 100%;
+    padding: 11px 30px;
+    font-size: 16px;
+    line-height: 28px;
+    font-weight: 400;
+    text-transform: capitalize;
+    letter-spacing: 1.5px;
+    border-radius: 0;
+    border: 1px solid #eaeaeb;
+    background: #eaeaeb;
+    color: #000a12;
+    transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+    margin-bottom: 15px;
+}
+
+.checkout{
+    color: white  !important;
+    background-color: black !important;
+}

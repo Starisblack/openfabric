@@ -1,0 +1,10 @@
+.feature-product-container{
+    padding: 100px 120px;
+}
+
+
+@media (max-width: 769px) {
+    .feature-product-container{
+        padding: 80px 50px;
+    }
+}

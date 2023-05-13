@@ -1,3 +1,13 @@
+.listing-card-container {
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+    grid-gap: 30px 23px;
+    grid-auto-rows: auto;
+    margin: 0 auto 30px auto;
+    width: 80%;
+  }
+
 .listing-card-container a,
 .listing-card-container a:hover {
     text-decoration: none;
@@ -25,8 +35,9 @@
     margin-bottom: 20px;
     overflow: hidden;
     background-repeat: no-repeat;
-    background-size: contain !important;
+    background-size: contain;
     background-repeat: no-repeat !important;
+    background-position: center center !important;
 }
 
 
@@ -115,3 +126,25 @@
     background-color: #444444;
     transform: translateY(-50%);
 }
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    .listing-card-container {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+  }
+
+
+  @media (max-width: 767px) {
+    .listing-card-container {
+      grid-template-columns: minmax(0, 1fr);
+      grid-gap: 20px 23px;
+      width: 95%;
+      margin-bottom: 30px;
+      padding: 5%;
+    }
+
+    .single-product .part-1{
+        background-size: cover !important;
+    }
+
+  }

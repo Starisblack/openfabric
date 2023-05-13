@@ -42,7 +42,7 @@ export default ConfirmationDialog;
 
 ConfirmationDialog.propTypes = {
   yesHandler: PropTypes.func,
-  openAlert: PropTypes.string,
+  openAlert: PropTypes.bool,
   loading: PropTypes.bool,
   title: PropTypes.string,
   closeAlert: PropTypes.func,
