@@ -42,6 +42,7 @@ const UserProfile = () => {
         dispatch(setUser(data.user));
       } catch (error) {
         console.log("You are not authorized please login");
+        dispatch(logout())
         navigate("/auth/login");
       }
     };

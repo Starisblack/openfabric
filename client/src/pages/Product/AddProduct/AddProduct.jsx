@@ -37,6 +37,7 @@ const AddProduct = () => {
     const config = {
       header: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     };
 
