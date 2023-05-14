@@ -17,7 +17,7 @@ const Checkout = () => {
     <div>
       <div className="px-4 px-lg-0">
         
-       {itemsInCart >= 1 ? <div className="pb-5">
+       {itemsInCart.length >= 1 ? <div className="pb-5">
           <div className="container">
             <div className="row">
 
