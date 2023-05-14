@@ -3,6 +3,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch, useSelector } from "react-redux";
 import { cart, removeFromCart } from "../../../reducers/product/product";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const Checkout = () => {
   const itemsInCart = useSelector(cart);
@@ -12,6 +13,11 @@ const Checkout = () => {
     .reduce((a, b) => a + b, 0);
   const shippingFee = 10;
   const totalAmt = productsPrice + shippingFee;
+
+
+  useEffect(()=>{
+    window.scrollTo(0, 0);
+  }, [])
 
   return (
     <div>

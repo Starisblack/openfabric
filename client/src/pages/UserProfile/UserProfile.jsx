@@ -25,9 +25,12 @@ const UserProfile = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (!token) {
       navigate("/auth/login");
     }
+
+    
 
     const fetchData = async () => {
       const config = {
@@ -42,7 +45,7 @@ const UserProfile = () => {
         dispatch(setUser(data.user));
       } catch (error) {
         console.log("You are not authorized please login");
-        // dispatch(logout())
+        dispatch(logout())
         navigate("/auth/login");
       }
     };

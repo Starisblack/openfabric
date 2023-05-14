@@ -6,6 +6,7 @@ import "./Layout.css";
 import PropTypes from "prop-types";
 import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 import { useState } from "react";
+import Footer from "../../components/Footer/Footer";
 
 const Layout = ({ children }) => {
   const location = useLocation();
@@ -29,7 +30,7 @@ const Layout = ({ children }) => {
       >
         {children}
       </main>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };

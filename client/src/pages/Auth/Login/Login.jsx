@@ -20,7 +20,6 @@ import {
 } from "../../../reducers/auth/authReducers";
 import { useEffect } from "react";
 
-
 const Login = () => {
   let navigate = useNavigate();
 
@@ -29,32 +28,33 @@ const Login = () => {
   const dispatch = useDispatch();
   const status = useSelector(loading);
 
-  const { register, handleSubmit, reset } = useForm();
-
+  const { register, handleSubmit} = useForm();
 
   useEffect(() => {
     if (token) {
       navigate("/profile");
     }
-    if(errorMsg){
+    if (errorMsg) {
       setTimeout(() => {
-        dispatch(clearError())
+        dispatch(clearError());
       }, 3000);
-      
     }
   }, [dispatch, errorMsg, navigate, token]);
 
   const sumbitHandler = (userInput) => {
     dispatch(loginAsync(userInput));
-    reset()
   };
 
   return (
     <div className="page login-page">
       <Container component="main" maxWidth="xs">
-        <div style={{arginTop: 8,
-            display: "flex",  flexDirection: "column",
-            alignItems: "center", }}
+        <div
+          style={{
+            arginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
         >
           <Avatar sx={{ m: 1, bgcolor: "black" }}>
             <LockOutlinedIcon />
@@ -70,11 +70,11 @@ const Login = () => {
               required
               fullWidth
               label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
             />
-            <PasswordInput label="Password" register={{ ...register("password") }} />
+            <PasswordInput
+              label="Password"
+              register={{ ...register("password") }}
+            />
             <Grid item xs={12} md={12}>
               <Link to="/forgotpassword" className="text-start">
                 Forgot password?

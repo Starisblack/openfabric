@@ -45,12 +45,12 @@ const SignUp = () => {
       return dispatch(setError("Password do not match"));
     }
 
-    dispatch(signUpAsync(userInput));
+    await dispatch(signUpAsync(userInput));
     reset();
   };
 
   return (
-    <div className="signUp-page">
+    <div className="page signUp-page">
       <Container component="main" maxWidth="xs">
         <div
           style={{
@@ -73,11 +73,7 @@ const SignUp = () => {
               margin="normal"
               required
               fullWidth
-              id="email"
               label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
             />
 
             <PasswordInput

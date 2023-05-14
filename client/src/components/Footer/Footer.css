@@ -1,0 +1,103 @@
+.footer-container {
+  justify-content: space-between;
+  padding: 2% 5%;
+  background-color: black;
+}
+
+.fa-brands{
+  color: white;
+}
+
+.footer-container,
+.left-footer {
+  display: flex;
+  align-items: center;
+}
+
+.left-footer {
+  gap: 30px;
+}
+
+.right-footer a {
+  margin: 0 10px;
+  color: white;
+}
+
+.right-footer a:hover{
+  opacity: .8;
+}
+
+.socials {
+  position: relative;
+}
+
+.fa-brands {
+  font-size: 25px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.fa-twitter:hover{
+  color: #1DA1F2;
+}
+
+.fa-instagram:hover {
+  background: radial-gradient(
+    circle at 30% 107%,
+    #fdf497 0%,
+    #fdf497 5%,
+    #fd5949 45%,
+    #d6249f 60%,
+    #285aeb 90%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.first:hover {
+  color: #00fff8;
+}
+.fa-facebook:hover{
+  color:#3b5998;
+}
+
+.second {
+  visibility: hidden;
+  mix-blend-mode: multiply;
+  color: #ff0010;
+  position: absolute;
+  right: 3px;
+}
+
+.first:hover + .second {
+ visibility: visible;
+}
+/* 
+.fa-tiktok:hover{
+  position: relative;
+  color: #00fff8;
+} */
+
+
+@media (max-width: 731px) {
+  
+.footer-container{
+  flex-direction: column;
+}
+
+.left-footer{
+  margin-bottom: 1rem;
+}
+}
+
+@media (max-width: 500px) {
+   .footer-container{
+    padding-top: 6%;
+    padding-bottom: 6%;
+   }
+
+   .fa-brands {
+    font-size: 20px;
+  }
+}

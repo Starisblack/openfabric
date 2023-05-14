@@ -44,7 +44,7 @@ const SingleProduct = () => {
  if(!product) return <h1>Loading</h1>
 
   return (
-    <div className="single-product-container">
+    <div className="page single-product-container">
       <div className="row">
         <div className="col-12 col-lg-6">
           <img src={chair} />
