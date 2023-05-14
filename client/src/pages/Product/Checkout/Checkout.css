@@ -12,3 +12,35 @@
     width: 20%; 
     margin: 0 auto;
 }
+
+/* .row>* {
+    padding: 0  !important;
+} */
+
+
+
+@media (max-width: 631px) {
+    th, td{
+        text-align: center;
+        font-size: 12px;
+    }
+
+    .checkout-container .ms-3{
+        margin-left: 0 !important;
+        margin-top: 5px;
+    }
+   .checkout-container h5{
+        text-align: center;
+        font-size: 14px;
+    }
+}
+
+
+@media (max-width: 400px) {
+    .checkout-img{
+        height: 50px;
+        width: 50px;
+        margin-right: 10px;
+        margin-top: 10px;
+    }    
+}

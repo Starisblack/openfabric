@@ -17,7 +17,7 @@ const ListingCard = ({ data }) => {
           <div className="listing-card-container">
             {data.map((data) => {
               return (
-                <div key={data.title}>
+                <div key={data._id}>
                   <div className="single-product">
                     <div
                       style={{ background: `url(${chair})`, backgroundSize: "cover" }}

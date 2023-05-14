@@ -5,24 +5,26 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { useEffect, useState } from "react";
 import {useNavigate, useParams } from "react-router-dom";
 import Axios from "../../../axiosBaseUrl"
-import { useDispatch, useSelector } from "react-redux";
-import { addQuantity, addToCart, quantity, removeQuantity } from "../../../reducers/product/product";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../../reducers/product/product";
 
 const SingleProduct = () => {
 
   const {id} = useParams() 
 
- const value = useSelector(quantity)
+//  const value = useSelector(quantity)
 
  const dispatch = useDispatch()
-  // const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(0);
   const [product, setProduct] = useState({})
   const navigate = useNavigate()
 
 
+
+
   useEffect(()=>{
     window.scrollTo(0, 0);
-    const getProduct =async () => {
+    const getProduct = async () => {
 
       try {
        const {data} = await Axios.get("/product/" + id)
@@ -57,18 +59,18 @@ const SingleProduct = () => {
             <div className="quantity quantity-buttons">
               <p>Quantity</p>
               <div className="quantity-btn">
-                <button disabled={value === 0}  onClick={() => dispatch(removeQuantity())}>
+                <button disabled={quantity === 0}  onClick={() => setQuantity(quantity - 1)  }>
                   <RemoveIcon />
                 </button>
-                <input type="number" value={value || 0} />
+                <input type="number" value={quantity} onChange={(e)=> setQuantity(e.target.value)}/>
 
-                <button onClick={() => dispatch(addQuantity())}>
+                <button onClick={() => setQuantity(quantity + 1)  }>
                   <AddIcon />
                 </button>
               </div>
             </div>
 
-            <button onClick={()=> dispatch(addToCart({...product, quantity: value}))} type="submit" className="add-to-cart-btn">
+            <button onClick={()=> dispatch(addToCart({...product, quantity: quantity}))} type="submit" className="add-to-cart-btn">
               Add to cart
             </button>
           </div>

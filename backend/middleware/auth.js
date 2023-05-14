@@ -17,10 +17,12 @@ exports.protect = async (req, res, next) => {
   }
 
   try {
-    const decode = jwt.verify(token, process.env.JWT_SECRET)
+    const decode = jwt.verify(token, process.env.JWT_SECRET);
 
     const user = await User.findById(decode.id);
 
+    console.log(user)
+  
     if (!user) {
       return next(new ErrorResponse("No user found with this Id", 404));
     }
@@ -29,6 +31,7 @@ exports.protect = async (req, res, next) => {
 
     next();
   } catch (error) {
+    console.log(error)
     return next(new ErrorResponse("Not authorized", 404));
   }
 };

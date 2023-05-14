@@ -16,7 +16,7 @@ const FeatureProducts = () => {
       try {
         const { data } = await Axios.get("/product/all");
 
-        setProducts(data.products.slice(0, 8));
+        setProducts(data.products.slice(0, 6));
       } catch (error) {
        console.log(error)
         navigate("/");

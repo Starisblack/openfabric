@@ -12,7 +12,7 @@ import Axios from "../../../axiosBaseUrl";
 import ConfirmationDialog from "../../../components/ConfirmationDialog/ConfirmationDialog";
 
 const ManageProduct = () => {
-  const userProducts = useSelector(products);
+  const allProducts = useSelector(products);
   const currentUser = useSelector(user);
   const token = useSelector(authToken);
   const navigate = useNavigate();
@@ -20,14 +20,25 @@ const ManageProduct = () => {
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [userProducts, setUserProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     if (!currentUser) {
       navigate("/auth/login");
     }
-  }, [currentUser, navigate]);
+
+    const getUserProducts = () => {
+      const items = allProducts.filter(
+        (item) => item.createdBy === currentUser._id
+      ); 
+
+        setUserProducts(items)
+
+    };
+    window.scrollTo(0, 0);
+    getUserProducts();
+  }, [allProducts, currentUser, navigate]);
 
   if (!currentUser) return <Spinner />;
 
@@ -60,8 +71,8 @@ const ManageProduct = () => {
 
     try {
       await Axios.post("/product/delete", { id: selectedProduct._id }, config);
-      setLoading(false);
       window.location.reload(true);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -80,16 +91,15 @@ const ManageProduct = () => {
       <FormDialog open={showUpdateForm}>
         <EditProductForm data={selectedProduct} handleClose={handleClose} />
       </FormDialog>
-      {userProducts.length >= 1 ? (
+      {userProducts
+        .length >= 1 ? (
         <div>
           <h1 className="text-center">Manage Your Products</h1>
           <div className="container py-3">
             <div className="col-xs-12 col-md-12 bootstrap snippets bootdeys">
               <div className="product-content product-wrap clearfix">
                 <div className="row g-4 justify-content-start mt-4 user-product-list">
-                  {userProducts
-                    .filter((item) => item.createdBy === currentUser._id)
-                    .map((product) => {
+                  {userProducts.map((product) => {
                       return (
                         <div key={product._id} className="col-12 col-lg-5 m-2">
                           <div className="row h-100 g-4">
@@ -150,12 +160,13 @@ const ManageProduct = () => {
           </div>
         </div>
       ) : (
-        <div className="text-center vh-100 d-flex flex-column justify-content-center">
-          <h1 >You have no products</h1>
+        <div style={{height: "70vh"}} className="text-center d-flex flex-column justify-content-center">
+          <h1>You have no products</h1>
 
-          <Link to="/product/add" className="btn btn-lg btn-dark mx-auto mt-3">Add Product</Link>
+          <Link to="/product/add" className="btn btn-lg btn-dark mx-auto mt-3">
+            Add Product
+          </Link>
         </div>
-
       )}
     </div>
   );

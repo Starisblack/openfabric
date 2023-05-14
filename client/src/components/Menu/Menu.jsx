@@ -12,6 +12,7 @@ import Logout from "@mui/icons-material/Logout";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { authToken, logout } from "../../reducers/auth/authReducers";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export default function AccountMenu() {
 
@@ -44,7 +45,9 @@ export default function AccountMenu() {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            <Avatar sx={{ width: 32, height: 32 }}>
+              <AccountCircleIcon />
+            </Avatar>
           </IconButton>
         </Tooltip>
       </Box>

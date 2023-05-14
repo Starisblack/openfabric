@@ -42,7 +42,7 @@ const UserProfile = () => {
         dispatch(setUser(data.user));
       } catch (error) {
         console.log("You are not authorized please login");
-        dispatch(logout())
+        // dispatch(logout())
         navigate("/auth/login");
       }
     };
@@ -137,17 +137,14 @@ const UserProfile = () => {
                     style={{ width: "150px", zIndex: "1" }}
                   />
                 </div>
-                <div className="ms-3" style={{ marginTop: "130px" }}>
-                  <h5>Andy Horwitz</h5>
-                  <p>New York</p>
-                </div>
+                
               </div>
               <div
                 className="pt-6 text-black"
                 style={{ backgroundColor: "#f8f9fa" }}
               >
                 <div className="card mb-4 user-details-card">
-                  <form>
+                  <form className="p-3">
                     {profileDetails.map((detail) => {
                       return (
                         <TextField

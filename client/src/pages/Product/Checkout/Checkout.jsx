@@ -15,13 +15,13 @@ const Checkout = () => {
 
   return (
     <div>
-      <div className="px-4 px-lg-0">
+      <div className="page px-4 px-lg-0  checkout-container">
         
        {itemsInCart.length >= 1 ? <div className="pb-5">
           <div className="container">
             <div className="row">
 
-              <div className="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+              <div className="col-lg-12 p-md-5 bg-white rounded shadow-sm mb-5">
                 <div className="table-responsive">
                   <table className="table">
                     <thead>
@@ -50,7 +50,7 @@ const Checkout = () => {
                                   src="https://bootstrapious.com/i/snippets/sn-cart/product-1.jpg"
                                   alt=""
                                   width="70"
-                                  className="img-fluid rounded shadow-sm"
+                                  className="img-fluid rounded shadow-sm checkout-img"
                                 />
                                 <div className="ms-3 d-inline-block align-middle">
                                   <h5 className="mb-0">
@@ -68,7 +68,7 @@ const Checkout = () => {
 
                             <td className="border-0 align-middle">
                               <strong>
-                                ${parseInt(item?.price).toLocaleString() * parseInt(item?.quantity)}
+                                ${item?.price * item?.quantity}
                               </strong>
                             </td>
                             <td className="border-0 align-middle">
@@ -92,31 +92,7 @@ const Checkout = () => {
 
             <div className="row py-5 p-4 bg-white rounded shadow-sm">
               <div className="col-lg-6">
-                <div className="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">
-                  Coupon code
-                </div>
-                <div className="p-4">
-                  <p className="font-italic mb-4">
-                    If you have a coupon code, please enter it in the box below
-                  </p>
-                  <div className="input-group mb-4 border rounded-pill p-2">
-                    <input
-                      type="text"
-                      placeholder="Apply coupon"
-                      aria-describedby="button-addon3"
-                      className="form-control border-0"
-                    />
-                    <div className="input-group-append border-0">
-                      <button
-                        id="button-addon3"
-                        type="button"
-                        className="btn btn-dark px-4 rounded-pill"
-                      >
-                        <i className="fa fa-gift mr-2"></i>Apply coupon
-                      </button>
-                    </div>
-                  </div>
-                </div>
+
                 <div className="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">
                   Instructions for seller
                 </div>

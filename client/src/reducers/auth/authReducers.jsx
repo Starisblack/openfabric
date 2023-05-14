@@ -11,14 +11,9 @@ const initialState = {
 
 export const loginAsync = createAsyncThunk(
   "login",
-  async (userInput, { dispatch, rejectWithValue }) => {
+  async (userInput, {rejectWithValue }) => {
     try {
       const { data } = await userLogin(userInput);
-
-      setTimeout(() => {
-        dispatch(logout);
-      }, 10);
-
       return data.token;
     } catch (error) {
       return rejectWithValue(error.response.data.error);
