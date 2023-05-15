@@ -58,6 +58,8 @@ exports.login = async (req, res, next) => {
 exports.forgotpassword = async (req, res, next) => {
   const { email } = req.body;
 
+  console.log(email)
+
   try {
     const user = await User.findOne({ email: email });
 
@@ -68,7 +70,9 @@ exports.forgotpassword = async (req, res, next) => {
     const resetToken = user.getResetPasswordToken();
     user.save();
 
-    const resetEmailUrl = `http://localhost:3000/passwordreset/${resetToken}`;
+    const resetEmailUrl = process.env.FRONTEND_URL+ "/passwordreset/" + resetToken;
+
+    console.log(resetEmailUrl)
 
     const message = `
            <h1>You have requested a password reset</h1>

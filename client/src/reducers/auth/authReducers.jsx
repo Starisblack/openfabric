@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { userLogin, signUpUser } from "./authAPI";
+import { userLogin, signUpUser, forgotPassword } from "./authAPI";
 
 const initialState = {
   authToken: null,
@@ -7,11 +7,12 @@ const initialState = {
   loading: false,
   status: null,
   error: null,
+  success: null,
 };
 
 export const loginAsync = createAsyncThunk(
   "login",
-  async (userInput, {rejectWithValue }) => {
+  async (userInput, { rejectWithValue }) => {
     try {
       const { data } = await userLogin(userInput);
       return data.token;
@@ -22,11 +23,23 @@ export const loginAsync = createAsyncThunk(
 );
 
 export const signUpAsync = createAsyncThunk(
-  "signUp",
+  "signup",
   async (userInput, { rejectWithValue }) => {
     try {
       const { data } = await signUpUser(userInput);
       return data.token;
+    } catch (error) {
+      return rejectWithValue(error.response.data.error);
+    }
+  }
+);
+
+export const forgotPasswordAsync = createAsyncThunk(
+  "forgotpassword",
+  async (userInput, { rejectWithValue }) => {
+    try {
+      const { data } = await forgotPassword(userInput);
+      return data.data;
     } catch (error) {
       return rejectWithValue(error.response.data.error);
     }
@@ -52,7 +65,7 @@ export const authSlice = createSlice({
     logout: (state) => {
       state.authToken = null;
       state.user = null;
-    }
+    },
   },
 
   extraReducers: (builder) => {
@@ -82,6 +95,18 @@ export const authSlice = createSlice({
       .addCase(signUpAsync.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      .addCase(forgotPasswordAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(forgotPasswordAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = action.payload;
+        state.error = null;
+      })
+      .addCase(forgotPasswordAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
@@ -92,5 +117,6 @@ export const authToken = (state) => state.auth.authToken;
 export const error = (state) => state.auth.error;
 export const loading = (state) => state.auth.loading;
 export const user = (state) => state.auth.user;
+export const success = state => state.auth.success
 
 export default authSlice.reducer;

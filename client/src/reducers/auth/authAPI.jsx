@@ -25,6 +25,14 @@ export const signUpUser = (userInput) => {
 };
 
 
+export const forgotPassword = (userInput) => {
+
+  return Axios.post("/auth/forgotpassword",
+    {email: userInput},
+    config
+  );
+};
+
 
 
 

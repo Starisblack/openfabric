@@ -13,7 +13,7 @@ const persistConfig = {
 const authPersistConfig = {
   key: 'user',
   storage,
-  blacklist: ["loading", "status", "error"]
+  blacklist: ["loading", "status", "error", "success"]
 }
 
 const productPersistConfig = {

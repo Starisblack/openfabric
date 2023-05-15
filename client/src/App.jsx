@@ -14,6 +14,8 @@ import { useEffect } from "react";
 import Axios from "./axiosBaseUrl"
 import { useDispatch } from "react-redux";
 import { setProducts } from "./reducers/product/product";
+import ForgotPassword from "./pages/Auth/ForgotPassword/ForgotPassword";
+import ResetPassword from "./pages/Auth/ResetPassword/ResetPassword";
 
 function App() {
 
@@ -50,6 +52,9 @@ function App() {
       <Route path="/product/:id" element={<SingleProduct />}/>
       <Route path="/product/manage" element={<ManageProduct />}/>
       <Route path="/product/checkout" element={<Checkout />}/>
+      <Route path="/forgotpassword" element={<ForgotPassword />}/>
+      <Route path="/passwordreset/:token" element={<ResetPassword />}/>
+      
 
      </Routes>
      

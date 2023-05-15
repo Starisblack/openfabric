@@ -1,70 +1,49 @@
 import { useEffect, useState } from "react";
-import Axios from "../../../axiosBaseUrl"
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Button } from "@mui/material";
-import "./ForgotPassword.css"
+import "./ForgotPassword.css";
 import { useNavigate } from "react-router-dom";
 import BeatLoader from "react-spinners/BeatLoader";
+import { useSelector, useDispatch } from "react-redux";
+import { authToken, error, forgotPasswordAsync, loading, success } from "../../../reducers/auth/authReducers";
 
 const ForgotPassword = () => {
-
+  const auth = useSelector(authToken);
+  const loadingStatus = useSelector(loading);
+  const err = useSelector(error);
+  const successMsg = useSelector(success)
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  console.log(success)
 
-  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  
   
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (auth) {
       navigate("/");
     }
-  }, [navigate]);
+  }, [auth, navigate]);
 
   const onChangeHandler = (e) => {
-      setEmail(e.target.value)
+    setEmail(e.target.value);
   };
 
   const sumbitHandler = async (e) => {
-     setLoading(true)
     e.preventDefault();
-    const config = {
-      header: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    try {
-      const { data } = await Axios.post(
-        "/auth/forgotpassword",
-        { email },
-        config
-      );
-  
-      setSuccess(data.data);
-      setLoading(false)
-    } catch (error) {
-      setError(error.response.data.error);
-      setLoading(false)
-      setTimeout(() => {
-        setError("");
-      }, 5000);
-    }
+     dispatch(forgotPasswordAsync(email))
   };
 
   return (
-    <div className="forgot-page" style={{marginTop: "64px"}}>
+    <div className="forgot-page" style={{ marginTop: "64px" }}>
       <Container component="main" maxWidth="xs">
-       
         <form onSubmit={sumbitHandler}>
-          <p style={{ color: "red", padding: "1rem 2rem" }}>{error}</p>
-          { success &&  <p style={{ color: "white", background: "green", padding: "1rem 2rem" }}>
-            {success}
+          <p style={{ color: "red", padding: "1rem 2rem" }}>{err}</p>
+          { successMsg &&  <p style={{ color: "white", background: "green", padding: "1rem 2rem" }}>
+            {successMsg}
           </p>}
           <Typography component="h1" variant="h5">
             Forgot Password?
@@ -77,21 +56,17 @@ const ForgotPassword = () => {
             required
             fullWidth
             onChange={onChangeHandler}
-            id="email"
             label="Email Address"
             name="email"
-            autoComplete="email"
-            autoFocus
           />
 
           <Button
             type="submit"
             fullWidth
             variant="contained"
-            color="success"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 3, mb: 2, bgcolor: "black" }}
           >
-         {loading ? <BeatLoader color="white" /> :   "Reset Password" }
+            {loadingStatus ? <BeatLoader color="white" /> : "Reset Password"}
           </Button>
         </form>
       </Container>

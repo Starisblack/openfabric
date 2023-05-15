@@ -8,6 +8,8 @@ import PasswordInput from "../../../components/PasswordInput";
 import "./ResetPassword.css";
 import { useForm } from "react-hook-form";
 import BeatLoader from "react-spinners/BeatLoader";
+import { useSelector } from "react-redux";
+import { authToken } from "../../../reducers/auth/authReducers";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
@@ -15,20 +17,19 @@ const ResetPassword = () => {
   const { token } = useParams();
 
   const { register, handleSubmit } = useForm();
-
+  const auth = useSelector(authToken);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      navigate("/");
+    if (auth) {
+      navigate("/profile");
     }
-  }, [navigate]);
+  }, [auth, navigate]);
 
   const sumbitHandler = async (userInput) => {
-
-     setLoading(true)
+    setLoading(true);
     const config = {
       header: {
         "Content-Type": "application/json",
@@ -39,6 +40,7 @@ const ResetPassword = () => {
       setTimeout(() => {
         setError("");
       }, 3000);
+      setLoading(false);
       return setError("Password do not match");
     }
 
@@ -50,11 +52,11 @@ const ResetPassword = () => {
         { password },
         config
       );
-        setLoading(false)
+      setLoading(false);
       setSuccess(data.data);
     } catch (error) {
       setError(error.response.data.error);
-      setLoading(false)
+      setLoading(false);
       setTimeout(() => {
         setError("");
       }, 3000);
@@ -89,8 +91,13 @@ const ResetPassword = () => {
             >
               {success}{" "}
               <Link
-                to="/login"
-                style={{ color: "white", marginLeft: "5px", fontWeight: "700", textDecoration: "underline" }}
+                to="/auth/login"
+                style={{
+                  color: "white",
+                  marginLeft: "5px",
+                  fontWeight: "700",
+                  textDecoration: "underline",
+                }}
               >
                 {" "}
                 Login
@@ -98,17 +105,22 @@ const ResetPassword = () => {
             </p>
           )}
 
-          <PasswordInput register={{ ...register("password") }} />
-          <PasswordInput register={{ ...register("confirmPassword") }} />
+          <PasswordInput
+            label="password"
+            register={{ ...register("password") }}
+          />
+          <PasswordInput
+            label="confirmPassword"
+            register={{ ...register("confirmPassword") }}
+          />
 
           <Button
             type="submit"
             fullWidth
             variant="contained"
-            color="success"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 3, mb: 2, bgcolor: "black" }}
           >
-           {loading ? <BeatLoader color="white" /> : "Reset Password" }
+            {loading ? <BeatLoader color="white" /> : "Reset Password"}
           </Button>
         </form>
       </Container>
