@@ -1,5 +1,6 @@
 import {
   FormControl,
+  FormHelperText,
   InputAdornment,
   InputLabel,
   OutlinedInput,
@@ -14,13 +15,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { authToken, user } from "../../../reducers/auth/authReducers";
 import BeatLoader from "react-spinners/BeatLoader";
 import { getAllProductsAsync } from "../../../reducers/product/product";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const AddProduct = () => {
-
-  const { handleSubmit, register } = useForm();
   const navigate = useNavigate();
   const token = useSelector(authToken);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const userData = useSelector(user);
   const [loading, setLoading] = useState(false);
 
@@ -28,7 +29,22 @@ const AddProduct = () => {
     if (!token) {
       navigate("/auth/login");
     }
+    window.scrollTo(0, 0);
   }, [navigate, token]);
+
+  // product schema for validation
+
+  const productSchema = yup.object().shape({
+    title: yup.string().required("Enter Product Title"),
+    price: yup.number() .typeError("Number Only").positive("Negative number not allowed").required("Enter Product Price"),
+  });
+
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(productSchema) });
 
   const sumbitHandler = async (userInput) => {
     setLoading(true);
@@ -48,8 +64,9 @@ const AddProduct = () => {
         config
       );
       setLoading(false);
-      dispatch(getAllProductsAsync())
+      dispatch(getAllProductsAsync());
       navigate("/product/" + data.product._id);
+      reset();
     } catch (error) {
       alert(error);
       setLoading(false);
@@ -63,12 +80,13 @@ const AddProduct = () => {
         <TextField
           {...register("title")}
           margin="normal"
-          required
           fullWidth
           label="Product Title"
+          error={!!errors.title}
+          helperText={errors.title && errors?.title?.message}
         />
 
-        <FormControl fullWidth margin="normal" required>
+        <FormControl fullWidth margin="normal" error={!!errors.price}>
           <InputLabel htmlFor="outlined-adornment-amount">Price</InputLabel>
           <OutlinedInput
             {...register("price")}
@@ -76,6 +94,9 @@ const AddProduct = () => {
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
             label="Amount"
           />
+          <FormHelperText>
+                {errors.price && errors?.price?.message}
+              </FormHelperText>
         </FormControl>
 
         <TextField

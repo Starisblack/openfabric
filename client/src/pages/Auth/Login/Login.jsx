@@ -19,6 +19,9 @@ import {
   loginAsync,
 } from "../../../reducers/auth/authReducers";
 import { useEffect } from "react";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
 
 const Login = () => {
   let navigate = useNavigate();
@@ -28,7 +31,18 @@ const Login = () => {
   const dispatch = useDispatch();
   const status = useSelector(loading);
 
-  const { register, handleSubmit} = useForm();
+  // login schema for validation
+  const loginSchema = yup.object().shape({
+    email: yup.string().email().required("Enter a valid email"),
+    password: yup.string().required("Enter your Password"),
+ })
+
+ const {
+  handleSubmit,
+  register,
+  reset,
+  formState: { errors },
+} = useForm({ resolver: yupResolver(loginSchema) });
 
   useEffect(() => {
     if (token) {
@@ -43,6 +57,7 @@ const Login = () => {
 
   const sumbitHandler = (userInput) => {
     dispatch(loginAsync(userInput));
+    reset()
   };
 
   return (
@@ -67,13 +82,16 @@ const Login = () => {
             <TextField
               {...register("email")}
               margin="normal"
-              required
               fullWidth
               label="Email Address"
+              error={!!errors.email}
+              helperText={errors.email && errors?.email?.message}
             />
             <PasswordInput
               label="Password"
               register={{ ...register("password") }}
+              error={errors.password && errors?.password?.message}
+              errorBorder={!!errors.password}
             />
             <Grid item xs={12} md={12}>
               <Link to="/forgotpassword" className="text-start">

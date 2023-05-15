@@ -20,6 +20,8 @@ import {
   signUpAsync,
 } from "../../../reducers/auth/authReducers";
 import { useDispatch, useSelector } from "react-redux";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -32,12 +34,29 @@ const SignUp = () => {
   useEffect(() => {
     if (token) {
       navigate("/profile");
+    } else {
+      dispatch(clearError())
     }
-  }, [navigate, token]);
+  }, [dispatch, navigate, token]);
 
-  const { handleSubmit, register, reset } = useForm();
+// register schema for validation
+  const registerSchema = yup.object().shape({
+    email: yup.string().email().required("Enter a valid email"),
+    password: yup.string().min(6, 'Must be at least 6 characters long').required(),
+    confirmPassword: yup.string().oneOf([yup.ref("password"), null], "Password don't match").required()
+
+ })
+
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(registerSchema) });
 
   const onSubmitHandler = async (userInput) => {
+
+    console.log(userInput)
     if (userInput.password !== userInput.confirmPassword) {
       setTimeout(() => {
         dispatch(clearError());
@@ -45,7 +64,7 @@ const SignUp = () => {
       return dispatch(setError("Password do not match"));
     }
 
-    await dispatch(signUpAsync(userInput));
+    dispatch(signUpAsync(userInput));
     reset();
   };
 
@@ -71,18 +90,23 @@ const SignUp = () => {
             <TextField
               {...register("email")}
               margin="normal"
-              required
               fullWidth
               label="Email Address"
+              error={!!errors.email}
+              helperText={errors.email && errors?.email?.message}
             />
 
             <PasswordInput
               label="Password"
               register={{ ...register("password") }}
+              error={errors.password && errors?.password?.message}
+              errorBorder={!!errors.password}
             />
             <PasswordInput
               label="Confirm Password"
               register={{ ...register("confirmPassword") }}
+              error={errors.confirmPassword && errors?.confirmPassword?.message}
+              errorBorder={!!errors.confirmPassword}
             />
             <p style={{ color: "red", marginTop: "15px" }}>{errorMsg}</p>
             <Button
