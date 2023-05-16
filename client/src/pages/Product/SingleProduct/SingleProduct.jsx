@@ -49,7 +49,7 @@ const SingleProduct = () => {
         <div className="col-12 col-lg-6">
           <img src={chair} />
         </div>
-        <div className="col-12 col-lg-6">
+        <div className="col-12 col-lg-6 my-2  my-md-o">
           <h3 className="single-product-title">{product?.title}</h3>
           <p className="price">${product.price?.toLocaleString()}</p>
           <p className="description">

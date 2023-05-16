@@ -31,15 +31,7 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const status = useSelector(loading);
 
-  useEffect(() => {
-    if (token) {
-      navigate("/profile");
-    } else {
-      dispatch(clearError())
-    }
-  }, [dispatch, navigate, token]);
-
-// register schema for validation
+  // register schema for validation
   const registerSchema = yup.object().shape({
     email: yup.string().email().required("Enter a valid email"),
     password: yup.string().min(6, 'Must be at least 6 characters long').required(),
@@ -54,6 +46,19 @@ const SignUp = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(registerSchema) });
 
+
+  useEffect(() => {
+    if (token) {
+      navigate("/profile");
+      reset()
+    } else {
+      dispatch(clearError())
+    }
+  }, [dispatch, navigate, reset, token]);
+
+
+
+ 
   const onSubmitHandler = async (userInput) => {
 
     console.log(userInput)
@@ -65,7 +70,6 @@ const SignUp = () => {
     }
 
     dispatch(signUpAsync(userInput));
-    reset();
   };
 
   return (
